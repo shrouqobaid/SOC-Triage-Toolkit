@@ -51,7 +51,8 @@ pip install -r requirements.txt```
 4- عداد مفتاح الـ API:
 أنشئ ملف باسم .env في المجلد الرئيسي وأضف مفتاح VirusTotal الخاص بك:
 
-`VIRUSTOTAL_API_KEY=your_actual_api_key_here`
+```bash
+VIRUSTOTAL_API_KEY=your_actual_api_key_here```
 
 ## طريقة الاستخدام
 قم بتشغيل الأداة عن طريق تمرير ملف نصي يحتوي على مؤشرات الاختراق (مؤشر واحد في كل سطر):
