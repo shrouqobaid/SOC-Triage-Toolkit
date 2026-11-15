@@ -17,27 +17,27 @@
 
 ## 🛠️ هيكل المشروع
 
-```text
-SOC-Triage-Toolkit/
-│
-├── main.py                 # ملف التشغيل الرئيسي
-├── requirements.txt        # المكتبات البرمجية المطلوبة
-├── .env                    # إعدادات مفاتيح الـ API (يتم استثنائها في git)
-├── iocs.txt                # ملف تجريبي يحتوي على مؤشرات الاختراق
-├── SOC_Triage_Report.md    # تقرير التحقيق الناتج تلقائياً
-├── modules/
-│   ├── __init__.py
-│   ├── vt_checker.py       # موديول التكامل مع VirusTotal API
-│   └── reporter.py         # موديول توليد تقارير الـ Markdown
-└── screenshots/            # لقطات الشاشة وتوضيح عمل الأداة
-```
+يوضح الجدول التالي مكونات المشروع وملفاته الأساسية:
+
+| المسار / الملف | النوع | الوصف المختصر |
+| :--- | :---: | :--- |
+| `main.py` | ملف أساسي | ملف التشغيل الرئيسي للتحكم واستقبال الأوامر (CLI). |
+| `requirements.txt` | ملف تكوين | يحتوي على المكتبات البرمجية المطلوبة لتشغيل الأداة. |
+| `.env` | ملف سري | تخزين مفاتيح الـ API بشكل آمن (يتم استثنائه من Git). |
+| `iocs.txt` | ملف مدخلات | ملف تجريبي يحتوي على مؤشرات الاختراق (IOCs) المراد فحصها. |
+| `SOC_Triage_Report.md` | ملف مخرجات | تقرير التحقيق النهائي الناتج بصيغة Markdown تلقائياً. |
+| `modules/__init__.py` | موديول | تعريف مجلد الموديولات البرمجية. |
+| `modules/vt_checker.py` | موديول | المسؤول عن التكامل مع VirusTotal API وفحص الـ IOCs. |
+| `modules/reporter.py` | موديول | المسؤول عن هندسة وبناء تقارير الـ Markdown. |
+| `screenshots/` | مجلد | يحتوي على لقطات الشاشة وتوضيح عمل الأداة في الـ README. |
+
 
 ## ⚙️ التثبيت والإعداد
 1- نسخ المستودع (Clone):
 ```git clone [https://github.com/shrouqobaid/SOC-Triage-Toolkit.git](https://github.com/YOUR_USERNAME/SOC-Triage-Toolkit.git)
 cd SOC-Triage-Toolkit```
 
-2-إنشاء وتفعيل البيئة الافتراضية:
+2- إنشاء وتفعيل البيئة الافتراضية:
 ``` python3 -m venv venv
 source venv/bin/activate```
 
@@ -46,10 +46,15 @@ source venv/bin/activate```
 
 4- عداد مفتاح الـ API:
 أنشئ ملف باسم .env في المجلد الرئيسي وأضف مفتاح VirusTotal الخاص بك:
-```VIRUSTOTAL_API_KEY=your_actual_api_key_here```
+
+```VIRUSTOTAL_API_KEY=your_actual_api_key_here
+```
+
 ## طريقة الاستخدام
 قم بتشغيل الأداة عن طريق تمرير ملف نصي يحتوي على مؤشرات الاختراق (مؤشر واحد في كل سطر):
-```python main.py -f iocs.txt```
+
+`python main.py -f iocs.txt`
+
 ## أمثلة ومخرجات الأداة
 1. تنفيذ الأداة والفحص عبر الـ Terminal
 2. معاينة التقرير الناتج بصيغة Markdown
