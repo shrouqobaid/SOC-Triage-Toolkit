@@ -39,8 +39,8 @@ git clone [https://github.com/shrouqobaid/SOC-Triage-Toolkit.git](https://github
 
 ```cd SOC-Triage-Toolkit```
 
-2- إنشاء وتفعيل البيئة الافتراضية:
 
+2- إنشاء وتفعيل البيئة الافتراضية:
 ```
 python3 -m venv venv
 ```
@@ -49,7 +49,6 @@ python3 -m venv venv
 source venv/bin/activate
 ```
 3- تثبيت المتطلبات:
-
 ```
 pip install -r requirements.txt
 ```
