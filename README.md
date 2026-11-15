@@ -35,9 +35,9 @@
 ## ⚙️ التثبيت والإعداد
 1- نسخ المستودع (Clone):
 ```
-git clone [https://github.com/shrouqobaid/SOC-Triage-Toolkit.git](https://github.com/shrouqobaid/SOC-Triage-Toolkit.git)
+git clone [https://github.com/shrouqobaid/SOC-Triage-Toolkit.git](https://github.com/shrouqobaid/SOC-Triage-Toolkit.git)```
 
-cd SOC-Triage-Toolkit```
+`cd SOC-Triage-Toolkit`
 
 
 2- إنشاء وتفعيل البيئة الافتراضية:
