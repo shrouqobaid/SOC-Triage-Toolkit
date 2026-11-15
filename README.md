@@ -34,7 +34,10 @@
 
 ## ⚙️ التثبيت والإعداد
 1- نسخ المستودع (Clone):
-```git clone [https://github.com/shrouqobaid/SOC-Triage-Toolkit.git](https://github.com/shrouqobaid/SOC-Triage-Toolkit.git)
+```
+git clone [https://github.com/shrouqobaid/SOC-Triage-Toolkit.git](https://github.com/shrouqobaid/SOC-Triage-Toolkit.git)```
+
+```
 cd SOC-Triage-Toolkit```
 
 2- إنشاء وتفعيل البيئة الافتراضية:
@@ -58,6 +61,8 @@ VIRUSTOTAL_API_KEY=your_actual_api_key_here```
 
 ```python main.py -f iocs.txt
 ```
+
+
 ## أمثلة ومخرجات الأداة
 1. تنفيذ الأداة والفحص عبر الـ Terminal
 2. معاينة التقرير الناتج بصيغة Markdown
