@@ -39,6 +39,7 @@ git clone [https://github.com/shrouqobaid/SOC-Triage-Toolkit.git](https://github
 
 ```
 cd SOC-Triage-Toolkit```
+
 2- إنشاء وتفعيل البيئة الافتراضية:
 
 ```
