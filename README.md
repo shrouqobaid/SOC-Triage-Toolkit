@@ -36,12 +36,14 @@
 1- نسخ المستودع (Clone):
 ```
 git clone [https://github.com/shrouqobaid/SOC-Triage-Toolkit.git](https://github.com/shrouqobaid/SOC-Triage-Toolkit.git)```
+
 ```
 cd SOC-Triage-Toolkit```
 
 2- إنشاء وتفعيل البيئة الافتراضية:
 ```
 python3 -m venv venv```
+
 ```
 source venv/bin/activate```
 
