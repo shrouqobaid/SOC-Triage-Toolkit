@@ -41,23 +41,24 @@
 
 2- إنشاء وتفعيل البيئة الافتراضية:
 
-`python3 -m venv venv`
-`source venv/bin/activate`
+```python3 -m venv venv```
+
+```source venv/bin/activate```
 
 3- تثبيت المتطلبات:
-```bash
+```
 pip install -r requirements.txt```
 
 4- عداد مفتاح الـ API:
 أنشئ ملف باسم .env في المجلد الرئيسي وأضف مفتاح VirusTotal الخاص بك:
 
-```bash
+```
 VIRUSTOTAL_API_KEY=your_actual_api_key_here```
 
 ## طريقة الاستخدام
 قم بتشغيل الأداة عن طريق تمرير ملف نصي يحتوي على مؤشرات الاختراق (مؤشر واحد في كل سطر):
 
-`python main.py -f iocs.txt`
+```python main.py -f iocs.txt```
 
 ## أمثلة ومخرجات الأداة
 1. تنفيذ الأداة والفحص عبر الـ Terminal
