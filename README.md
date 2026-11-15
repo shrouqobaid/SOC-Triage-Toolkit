@@ -45,14 +45,13 @@ cd SOC-Triage-Toolkit
 ```
 python3 -m venv venv
 ```
-
 ```
 source venv/bin/activate
 ```
 
 3- تثبيت المتطلبات:
-
-```pip install -r requirements.txt
+```
+pip install -r requirements.txt
 ```
 
 4- عداد مفتاح الـ API:
