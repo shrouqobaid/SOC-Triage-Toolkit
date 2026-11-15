@@ -68,7 +68,10 @@ python main.py -f iocs.txt
 ```
 
 
-## أمثلة ومخرجات الأداة
-1. تنفيذ الأداة والفحص عبر الـ Terminal
-2. معاينة التقرير الناتج بصيغة Markdown
+## 📊 أمثلة ومخرجات الأداة
 
+**1- تنفيذ الأداة والفحص عبر الـ Terminal:**
+![Terminal Output](screenshots/triage_output.png)
+
+**2- معاينة التقرير الناتج بصيغة Markdown:**
+![Report Preview](screenshots/report_preview.png)
