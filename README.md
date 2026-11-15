@@ -34,6 +34,7 @@
 
 ## ⚙️ التثبيت والإعداد
 1- نسخ المستودع (Clone):
+
 ```git clone [https://github.com/shrouqobaid/SOC-Triage-Toolkit.git](https://github.com/shrouqobaid/SOC-Triage-Toolkit.git)```
 
 ```cd SOC-Triage-Toolkit```
@@ -44,7 +45,8 @@
 `source venv/bin/activate`
 
 3- تثبيت المتطلبات:
-`pip install -r requirements.txt`
+```bash
+pip install -r requirements.txt```
 
 4- عداد مفتاح الـ API:
 أنشئ ملف باسم .env في المجلد الرئيسي وأضف مفتاح VirusTotal الخاص بك:
