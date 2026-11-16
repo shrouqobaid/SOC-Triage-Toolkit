@@ -1,4 +1,4 @@
-# 🛡️ SOC Triage & Enrichment Toolkit
+# SOC Triage & Enrichment Toolkit
 
 # 🛡️ أداة الفحص التلقائي وتوليد التقارير لمحللي الـ SOC
 
@@ -6,7 +6,7 @@
 
 ---
 
-## 🚀 المميزات الرئيسية
+## المميزات الرئيسية
 
 * **التحقق التلقائي من التهديدات:** الاستعلام تلقائياً عن طريق **VirusTotal API v3** لفحص عناوين الـ IP وقيم الـ Hashes (MD5/SHA256).
 * **التعرف الذكي على الـ IOCs:** التمييز بذكاء بين عناوين الشبكات (IPs) وهاشات الملفات.
@@ -15,7 +15,7 @@
 
 ---
 
-## 🛠️ هيكل المشروع
+## هيكل المشروع
 
 يوضح الجدول التالي مكونات المشروع وملفاته الأساسية:
 
@@ -32,7 +32,7 @@
 | `screenshots/` | مجلد | يحتوي على لقطات الشاشة وتوضيح عمل الأداة في الـ README. |
 
 
-## ⚙️ التثبيت والإعداد
+## التثبيت والإعداد
 1- نسخ المستودع (Clone):
 ```
 git clone [https://github.com/shrouqobaid/SOC-Triage-Toolkit.git](https://github.com/shrouqobaid/SOC-Triage-Toolkit.git)
@@ -68,7 +68,7 @@ python main.py -f iocs.txt
 ```
 
 
-## 📊 أمثلة ومخرجات الأداة
+## أمثلة ومخرجات الأداة
 
 **1- تنفيذ الأداة والفحص عبر الـ Terminal:**
 ![Terminal Output](screenshots/triage_output.png)
