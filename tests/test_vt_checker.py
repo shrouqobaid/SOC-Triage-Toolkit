@@ -3,6 +3,54 @@ from unittest.mock import patch, Mock
 
 from modules import vt_checker
 
+class TestClassifyIOC(unittest.TestCase):
+
+    def test_valid_ipv4(self):
+        result = vt_checker.classify_ioc("8.8.8.8")
+        self.assertEqual(result, "ip_address")
+
+    def test_valid_ipv6(self):
+        result = vt_checker.classify_ioc("2001:4860:4860::8888")
+        self.assertEqual(result, "ip_address")
+
+    def test_valid_md5(self):
+        result = vt_checker.classify_ioc(
+            "d41d8cd98f00b204e9800998ecf8427e"
+        )
+        self.assertEqual(result, "md5")
+
+    def test_valid_sha1(self):
+        result = vt_checker.classify_ioc(
+            "da39a3ee5e6b4b0d3255bfef95601890afd80709"
+        )
+        self.assertEqual(result, "sha1")
+
+
+    def test_valid_sha256(self):
+        result = vt_checker.classify_ioc(
+            "e3b0c44298fc1c149afbf4c8996fb924"
+            "27ae41e4649b934ca495991b7852b855"
+        )
+        self.assertEqual(result, "sha256")
+
+    def test_invalid_hash_characters(self):
+        result = vt_checker.classify_ioc(
+            "g" * 32
+        )
+        self.assertIsNone(result)
+
+    def test_empty_ioc(self):
+        result = vt_checker.classify_ioc("   ")
+        self.assertIsNone(result)
+
+    def test_invalid_ioc(self):
+        result = vt_checker.classify_ioc("hello_world")
+        self.assertIsNone(result)
+
+
+    def test_non_string_ioc(self):
+        result = vt_checker.classify_ioc(12345)
+        self.assertIsNone(result)
 
 class TestCheckIOC(unittest.TestCase):
 
@@ -188,6 +236,26 @@ class TestCheckIOC(unittest.TestCase):
         result = vt_checker.check_ioc("8.8.8.8")
 
         self.assertEqual(result["status"], "Error")
+    @patch("modules.vt_checker.requests.get")
+    def test_invalid_ioc_does_not_call_api(self, mock_get):
+
+        vt_checker.VT_API_KEY = "test_api_key"
+
+        result = vt_checker.check_ioc("invalid_ioc_123")
+
+        self.assertEqual(result["status"], "Invalid IOC")
+        mock_get.assert_not_called()
+
+
+    @patch("modules.vt_checker.requests.get")
+    def test_non_string_ioc_does_not_call_api(self, mock_get):
+
+        vt_checker.VT_API_KEY = "test_api_key"
+
+        result = vt_checker.check_ioc(12345)
+
+        self.assertEqual(result["status"], "Invalid IOC")
+        mock_get.assert_not_called()
 
 
 if __name__ == "__main__":
