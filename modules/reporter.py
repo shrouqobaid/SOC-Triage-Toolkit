@@ -79,6 +79,42 @@ def generate_markdown_report(results, output_path="SOC_Triage_Report.md"):
 
             table_rows += f"| `{ioc}` | {ioc_type} | {status} | Not Evaluated | Unknown | - | - | - | {recommendations['Unknown']} |\n"
 
+    # Executive Assessment
+    if successful_scans == 0:
+        executive_assessment = (
+            "UNABLE TO ASSESS: All IOC scans failed. "
+            "No threat assessment can be made. Retry analysis."
+        )
+
+    elif critical_count > 0:
+        executive_assessment = (
+            f"CRITICAL: {critical_count} critical IOC(s) detected. "
+            "Immediate investigation and containment required."
+        )
+
+    elif high_count > 0:
+        executive_assessment = (
+            f"HIGH: {high_count} high-severity IOC(s) detected. "
+            "Prioritize investigation."
+        )
+
+    elif medium_count > 0:
+        executive_assessment = (
+            f"MEDIUM: {medium_count} suspicious IOC(s) detected. "
+            "Review and validate findings."
+        )
+
+    elif unknown_count > 0:
+        executive_assessment = (
+            f"REVIEW REQUIRED: {unknown_count} IOC(s) could not be evaluated. "
+            "Retry analysis."
+        )
+
+    else:
+        executive_assessment = (
+            "NO THREATS DETECTED: No malicious or suspicious IOCs found."
+        )
+
     # Current timestamp
     gen_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
@@ -91,6 +127,9 @@ def generate_markdown_report(results, output_path="SOC_Triage_Report.md"):
 
 ## 📊 Executive Summary
 This report contains the automated threat intelligence enrichment results for the submitted Indicators of Compromise (IOCs) via VirusTotal API.
+
+### 🚨 Executive Assessment
+**{executive_assessment}**
 
 ## 📈 Executive Summary Statistics
 
