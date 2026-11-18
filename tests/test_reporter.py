@@ -2,6 +2,7 @@ import datetime
 import os
 import tempfile
 import unittest
+from unittest.mock import patch
 
 from modules.reporter import generate_markdown_report
 
@@ -103,6 +104,26 @@ class TestExecutiveAssessment(unittest.TestCase):
 
         self.assertIn("REVIEW REQUIRED", report)
         self.assertNotIn("NO THREATS DETECTED", report)
+
+    @patch("builtins.print")
+    @patch("builtins.open", side_effect=PermissionError("Access denied"))
+    def test_report_permission_error(self, mock_open, mock_print):
+        result = generate_markdown_report([], "protected_report.md")
+
+        self.assertFalse(result)
+        mock_print.assert_called_once_with(
+            "[!] Error: Permission denied when writing report 'protected_report.md'."
+        )
+
+    @patch("builtins.print")
+    @patch("builtins.open", side_effect=OSError("Disk error"))
+    def test_report_os_error(self, mock_open, mock_print):
+        result = generate_markdown_report([], "report.md")
+
+        self.assertFalse(result)
+        mock_print.assert_called_once_with(
+            "[!] Error writing report: Disk error"
+        )
 
 
 if __name__ == "__main__":

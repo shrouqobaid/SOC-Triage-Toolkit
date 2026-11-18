@@ -1,4 +1,3 @@
-
 import os
 import argparse
 from dotenv import load_dotenv
@@ -22,8 +21,21 @@ def main():
         print(f"[!] Error: File '{input_file}' not found.")
         return
 
-    with open(input_file, "r") as f:
-        iocs = [line.strip() for line in f if line.strip()]
+    try:
+        with open(input_file, "r") as f:
+            iocs = [line.strip() for line in f if line.strip()]
+
+    except PermissionError:
+        print(f"[!] Error: Permission denied when reading '{input_file}'.")
+        return
+
+    except OSError as e:
+        print(f"[!] Error reading input file: {e}")
+        return
+
+    if not iocs:
+        print("[!] Error: Input file is empty.")
+        return
 
     print(f"[*] Found {len(iocs)} IOCs to process.\n" + "="*50)
     
@@ -40,7 +52,6 @@ def main():
             print(f"    [!] Status: {result['status']} - {result.get('message', '')}")
         print("-" * 50)
 
-   
     generate_markdown_report(all_results, output_file)
 
 if __name__ == "__main__":
