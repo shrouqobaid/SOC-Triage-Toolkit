@@ -239,6 +239,7 @@ class TestCheckIOC(unittest.TestCase):
     @patch("modules.vt_checker.requests.get")
     def test_invalid_ioc_does_not_call_api(self, mock_get):
 
+        vt_decorator_key = vt_checker.VT_API_KEY
         vt_checker.VT_API_KEY = "test_api_key"
 
         result = vt_checker.check_ioc("invalid_ioc_123")
@@ -257,7 +258,47 @@ class TestCheckIOC(unittest.TestCase):
         self.assertEqual(result["status"], "Invalid IOC")
         mock_get.assert_not_called()
 
+    @patch("modules.vt_checker.requests.get")
+    def test_missing_api_key(self, mock_get):
+        original_key = vt_checker.VT_API_KEY
+
+        try:
+            vt_checker.VT_API_KEY = None
+
+            result = vt_checker.check_ioc("8.8.8.8")
+
+            self.assertEqual(result["status"], "Error")
+            self.assertEqual(
+                result["message"],
+                "API Key is missing or not configured."
+            )
+            mock_get.assert_not_called()
+
+        finally:
+            vt_checker.VT_API_KEY = original_key
+
+    @patch("modules.vt_checker.requests.get")
+    def test_server_error_500(self, mock_get):
+        original_key = vt_checker.VT_API_KEY
+
+        try:
+            vt_checker.VT_API_KEY = "test_api_key"
+
+            mock_response = Mock()
+            mock_response.status_code = 500
+            mock_get.return_value = mock_response
+
+            result = vt_checker.check_ioc("8.8.8.8")
+
+            self.assertEqual(result["status"], "API Error")
+            self.assertEqual(
+                result["message"],
+                "HTTP status code: 500"
+            )
+
+        finally:
+            vt_checker.VT_API_KEY = original_key
+
 
 if __name__ == "__main__":
     unittest.main()
-
