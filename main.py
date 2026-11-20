@@ -43,7 +43,15 @@ def main():
     
     for ioc in iocs:
         print(f"[-] Checking IOC: {ioc} ...")
-        result = check_ioc(ioc)
+        try:
+            result = check_ioc(ioc)
+        except Exception as e:
+            result = {
+                "ioc": ioc,
+                "status": "Error",
+                "message": f"Unexpected error: {e}",
+            }
+
         all_results.append(result)
         
         if result["status"] == "Success":
@@ -52,7 +60,13 @@ def main():
             print(f"    [!] Status: {result['status']} - {result.get('message', '')}")
         print("-" * 50)
 
-    generate_markdown_report(all_results, output_file)
+    report_generated = generate_markdown_report(all_results, output_file)
+
+    if not report_generated:
+        print("[!] Triage completed, but report generation failed.")
+        return
+
+    print("[+] Triage process completed successfully.")
 
 if __name__ == "__main__":
     main()

@@ -4,7 +4,7 @@ import tempfile
 import unittest
 from unittest.mock import patch
 
-from modules.reporter import generate_markdown_report
+from modules.reporter import generate_markdown_report, escape_markdown
 
 
 class TestExecutiveAssessment(unittest.TestCase):
@@ -19,11 +19,11 @@ class TestExecutiveAssessment(unittest.TestCase):
             output_path = temp_file.name
 
         try:
-            generate_markdown_report(results, output_path)
+            result = generate_markdown_report(results, output_path)
+            self.assertTrue(result)
 
             with open(output_path, "r", encoding="utf-8") as file:
                 return file.read()
-
         finally:
             os.remove(output_path)
 
@@ -87,6 +87,38 @@ class TestExecutiveAssessment(unittest.TestCase):
 
         self.assertIn("NO THREATS DETECTED", report)
 
+    def test_ioc_type_display(self):
+        report = self.generate_report([
+            {
+                "ioc": "2001:4860:4860::8888",
+                "status": "Success",
+                "ioc_type": "ip_address",
+                "malicious": 0,
+                "suspicious": 0,
+                "harmless": 50
+            },
+            {
+                "ioc": "a" * 40,
+                "status": "Success",
+                "ioc_type": "sha1",
+                "malicious": 0,
+                "suspicious": 0,
+                "harmless": 50
+            },
+            {
+                "ioc": "b" * 64,
+                "status": "Success",
+                "ioc_type": "sha256",
+                "malicious": 0,
+                "suspicious": 0,
+                "harmless": 50
+            }
+        ])
+
+        self.assertIn("| ip_address |", report)
+        self.assertIn("| sha1 |", report)
+        self.assertIn("| sha256 |", report)
+
     def test_mixed_successful_and_failed_scans(self):
         report = self.generate_report([
             {
@@ -123,6 +155,16 @@ class TestExecutiveAssessment(unittest.TestCase):
         self.assertFalse(result)
         mock_print.assert_called_once_with(
             "[!] Error writing report: Disk error"
+        )
+
+    def test_escape_markdown(self):
+        value = "test|value`code`\nnext\\line"
+
+        result = escape_markdown(value)
+
+        self.assertEqual(
+            result,
+            "test\\|value\\`code\\` next\\\\line"
         )
 
 

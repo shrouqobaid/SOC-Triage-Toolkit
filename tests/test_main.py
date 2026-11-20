@@ -92,5 +92,50 @@ class TestMain(unittest.TestCase):
         )
 
 
+    def test_unexpected_error_during_ioc_check(self):
+        with tempfile.NamedTemporaryFile(
+            mode="w",
+            delete=False
+        ) as temp_file:
+            temp_file.write("8.8.8.8\n1.1.1.1\n")
+            input_path = temp_file.name
+
+        self.addCleanup(os.unlink, input_path)
+
+        second_result = {
+            "ioc": "1.1.1.1",
+            "status": "Success",
+            "malicious": 0,
+            "suspicious": 0,
+            "harmless": 10
+        }
+
+        with patch("sys.argv", ["main.py", "-f", input_path]):
+            with patch(
+                "main.check_ioc",
+                side_effect=[
+                    RuntimeError("Unexpected failure"),
+                    second_result
+                ]
+            ) as mock_check:
+                with patch("main.generate_markdown_report") as mock_report:
+                    with patch("builtins.print"):
+                        main.main()
+
+        self.assertEqual(mock_check.call_count, 2)
+
+        mock_report.assert_called_once_with(
+            [
+                {
+                    "ioc": "8.8.8.8",
+                    "status": "Error",
+                    "message": "Unexpected error: Unexpected failure"
+                },
+                second_result
+            ],
+            "SOC_Triage_Report.md"
+        )
+
+
 if __name__ == "__main__":
     unittest.main()

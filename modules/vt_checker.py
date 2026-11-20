@@ -186,6 +186,7 @@ def check_ioc(ioc):
         return {
             "ioc": ioc,
             "status": "Success",
+            "ioc_type": ioc_type,
             "malicious": counts["malicious"],
             "suspicious": counts["suspicious"],
             "harmless": counts["harmless"]

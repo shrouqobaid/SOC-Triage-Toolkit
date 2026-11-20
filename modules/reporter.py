@@ -1,6 +1,17 @@
 import datetime
 import os
 
+
+def escape_markdown(value):
+    value = str(value)
+    value = value.replace("\\", "\\\\")
+    value = value.replace("|", "\\|")
+    value = value.replace("\n", " ")
+    value = value.replace("\r", " ")
+    value = value.replace("`", "\\`")
+    return value
+
+
 def generate_markdown_report(results, output_path="SOC_Triage_Report.md"):
     # Initialize counters
     total_iocs = len(results)
@@ -27,12 +38,14 @@ def generate_markdown_report(results, output_path="SOC_Triage_Report.md"):
         "Informational": "No immediate action required",
         "Unknown": "Retry analysis"
     }
+
     for item in results:
-        ioc = item.get("ioc", "N/A")
-        status = item.get("status", "Unknown")
+        ioc = escape_markdown(item.get("ioc", "N/A"))
+        status = escape_markdown(item.get("status", "Unknown"))
+
         if status == "Success":
             successful_scans += 1
-            ioc_type = item.get("ioc_type", "ip_address" if "." in ioc and not ioc.isalpha() else "md5")
+            ioc_type = escape_markdown(item.get("ioc_type", "Unknown"))
             malicious = item.get("malicious", 0)
             suspicious = item.get("suspicious", 0)
             harmless = item.get("harmless", 0)
@@ -62,22 +75,28 @@ def generate_markdown_report(results, output_path="SOC_Triage_Report.md"):
                 clean_iocs += 1
                 informational_count += 1
 
-            recommendation = recommendations.get(
-                severity,
-                "Manual review required"
+            recommendation = escape_markdown(
+                recommendations.get(severity, "Manual review required")
             )
 
             # Display malicious detection count
             mal_cell = str(malicious)
 
-            table_rows += f"| `{ioc}` | {ioc_type} | {status} | {verdict} | {severity} | {mal_cell} | {suspicious} | {harmless} | {recommendation} |\n"
+            table_rows += (
+                f"| `{ioc}` | {ioc_type} | {status} | {verdict} | {severity} | "
+                f"{mal_cell} | {suspicious} | {harmless} | {recommendation} |\n"
+            )
 
         else:
             failed_scans += 1
             unknown_count += 1
             ioc_type = "Unknown"
+            retry_rec = escape_markdown(recommendations["Unknown"])
 
-            table_rows += f"| `{ioc}` | {ioc_type} | {status} | Not Evaluated | Unknown | - | - | - | {recommendations['Unknown']} |\n"
+            table_rows += (
+                f"| `{ioc}` | {ioc_type} | {status} | Not Evaluated | Unknown | "
+                f"- | - | - | {retry_rec} |\n"
+            )
 
     # Executive Assessment
     if successful_scans == 0:
@@ -118,7 +137,7 @@ def generate_markdown_report(results, output_path="SOC_Triage_Report.md"):
     # Current timestamp
     gen_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
-# Markdown template
+    # Markdown template
     report_content = f"""# Automated SOC Alert Triage Report
 **Generated on:** `{gen_time}`<br>
 **Tool:** SOC-Triage-Toolkit

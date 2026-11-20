@@ -16,7 +16,7 @@
 * **توليد التقارير تلقائياً:** إنشاء تقارير تحقيق جاهزة ونظيفة (`SOC_Triage_Report.md`) تتضمن إحصائيات الخطورة وتوزيعات التهديدات (Malicious, Suspicious, Harmless).
 * **تقييم مستوى الخطورة:** تقديم تقييم تنفيذي (Executive Assessment) استنادًا إلى نتائج اكتشاف المؤشرات الضارة.
 * **معالجة الأخطاء (Error Handling):** التعامل باحترافية مع أخطاء الملفات، مثل عدم وجود الملف، الملفات الفارغة، مشكلات الصلاحيات (`PermissionError`)، وأخطاء نظام التشغيل (`OSError`).
-* **إدارة مفاتيح API بأمان:** استخدام ملفات البيئة `.env` لإدارة مفاتيح الـ API بسرية وأمان تامة بعيداً عن الشيفرة البرمجية.
+* **إدارة مفاتيح API:** استخدام ملفات البيئة (`.env`) ومتغيرات البيئة لتخزين مفتاح API وفصله عن الشيفرة البرمجية، مع استثناء الملف من Git باستخدام `.gitignore`.
 * **الاختبارات البرمجية (Unit Testing):** تضمين حزمة اختبارات آلية شاملة (Unit Tests) للتحقق من وظائف الأداة وسلوكها في حالات النجاح والفشل.
 
 ---
@@ -40,7 +40,7 @@
 - [`SOC-Triage-Toolkit/`](.)
   - [`main.py`](main.py)
   - [`requirements.txt`](requirements.txt)
-  - [`.env`](.env)
+- [`.env.example`](.env.example)
   - [`.gitignore`](.gitignore)
   - [`iocs.txt`](iocs.txt)
   - [`modules/`](modules)
@@ -52,13 +52,13 @@
     - [`test_vt_checker.py`](tests/test_vt_checker.py)
     - [`test_reporter.py`](tests/test_reporter.py)
   - [`screenshots/`](screenshots)
-    - [`triage_output.png`](screenshots/triage_output.png)
-    - [`report_preview.png`](screenshots/report_preview.png)
+    - [`triage_output.png`](screenshots/triage_output_v3.png)
+    - [`report_preview.png`](screenshots/report_preview_v3.png)
 
 ## التثبيت والإعداد
 1- نسخ المستودع (Clone):
 ```
-git clone [https://github.com/shrouqobaid/SOC-Triage-Toolkit.git](https://github.com/shrouqobaid/SOC-Triage-Toolkit.git)
+git clone https://github.com/shrouqobaid/SOC-Triage-Toolkit.git
 ```
 ```
 cd SOC-Triage-Toolkit
@@ -120,6 +120,7 @@ python -m unittest discover -s tests -v
 - اختبار الملفات غير الموجودة (`nonexistent.txt`) والملفات الفارغة.
 - اختبار أخطاء الصلاحيات (`PermissionError`) ونظام الملفات (`OSError`).
 - التحقق من نجاح سير عمل الفحص الأساسي (`Successful Triage`).
+- اختبار معالجة الاستثناءات غير المتوقعة أثناء فحص مؤشرات الاختراق، والتحقق من استمرار معالجة بقية المؤشرات.
 
 ## صور توضيحية
 تنفيذ الأداة والفحص عبر الـ Terminal:
