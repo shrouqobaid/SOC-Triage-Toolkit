@@ -117,6 +117,7 @@ python main.py -f iocs.txt -o reports/triage_report.md
 python -m unittest discover -s tests -v
 ```
 
+<<<<<<< HEAD
 ## تشمل الاختبارات:
 
 - التحقق من صحة تصنيف مؤشرات الاختراق.
@@ -163,3 +164,10 @@ python -m unittest discover -s tests -v
 تطوير: Shrouq Obaidallah Almejireshi
 
 المجالات: Cybersecurity | Blue Team | SOC Operations | Python Automation 
+=======
+**1- تنفيذ الأداة والفحص عبر الـ Terminal:**
+![Terminal Output](screenshots/triage_output_v2.png)
+
+**2- معاينة التقرير الناتج بصيغة Markdown:**
+![Report Preview](screenshots/report_preview_v2.png)
+>>>>>>> bf5d7e9 (Rename screenshots to refresh GitHub image links)
