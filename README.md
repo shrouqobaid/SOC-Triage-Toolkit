@@ -37,29 +37,23 @@
 | `modules/reporter.py` | موديول | المسؤول عن هندسة وبناء تقارير الـ Markdown. |
 | `screenshots/` | مجلد | يحتوي على لقطات الشاشة وتوضيح عمل الأداة في الـ README. |
 
-```text
-SOC-Triage-Toolkit/
-│
-├── main.py
-├── requirements.txt
-├── .env
-├── .gitignore
-├── iocs.txt
-│
-├── modules/
-│   ├── __init__.py
-│   ├── vt_checker.py
-│   └── reporter.py
-│
-├── tests/
-│   ├── test_main.py
-│   ├── test_vt_checker.py
-│   └── test_reporter.py
-│
-└── screenshots/
-    ├── triage_output.png
-    └── report_preview.png
-```
+- [`SOC-Triage-Toolkit/`](.)
+  - [`main.py`](main.py)
+  - [`requirements.txt`](requirements.txt)
+  - [`.env`](.env)
+  - [`.gitignore`](.gitignore)
+  - [`iocs.txt`](iocs.txt)
+  - [`modules/`](modules)
+    - [`__init__.py`](modules/__init__.py)
+    - [`vt_checker.py`](modules/vt_checker.py)
+    - [`reporter.py`](modules/reporter.py)
+  - [`tests/`](tests)
+    - [`test_main.py`](tests/test_main.py)
+    - [`test_vt_checker.py`](tests/test_vt_checker.py)
+    - [`test_reporter.py`](tests/test_reporter.py)
+  - [`screenshots/`](screenshots)
+    - [`triage_output.png`](screenshots/triage_output.png)
+    - [`report_preview.png`](screenshots/report_preview.png)
 
 ## التثبيت والإعداد
 1- نسخ المستودع (Clone):
@@ -106,7 +100,7 @@ python main.py -f iocs.txt
 python main.py -f iocs.txt -o reports/triage_report.md
 ```
 بعد اكتمال عملية الفحص، تنشئ الأداة تقريرًا بصيغة Markdown (SOC_Triage_Report.md) يتضمن نتائج تحليل المؤشرات والإحصائيات والتقييم التنفيذي.
-![Report Preview](screenshots/report_preview.png)
+![Report Preview](screenshots/report_preview_v3.png)
 ---
 
 ## الاختبارات البرمجية (Testing)
@@ -117,7 +111,6 @@ python main.py -f iocs.txt -o reports/triage_report.md
 python -m unittest discover -s tests -v
 ```
 
-<<<<<<< HEAD
 ## تشمل الاختبارات:
 
 - التحقق من صحة تصنيف مؤشرات الاختراق.
@@ -129,7 +122,7 @@ python -m unittest discover -s tests -v
 
 ## صور توضيحية
 تنفيذ الأداة والفحص عبر الـ Terminal:
-![Terminal Output](screenshots/triage_output.png)
+![Terminal Output](screenshots/triage_output_v3.png)
 
 
 
@@ -164,10 +157,3 @@ python -m unittest discover -s tests -v
 تطوير: Shrouq Obaidallah Almejireshi
 
 المجالات: Cybersecurity | Blue Team | SOC Operations | Python Automation 
-=======
-**1- تنفيذ الأداة والفحص عبر الـ Terminal:**
-![Terminal Output](screenshots/triage_output_v3.png)
-
-**2- معاينة التقرير الناتج بصيغة Markdown:**
-![Report Preview](screenshots/report_preview_v3.png)
->>>>>>> bf5d7e9 (Rename screenshots to refresh GitHub image links)
