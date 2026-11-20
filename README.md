@@ -166,8 +166,8 @@ python -m unittest discover -s tests -v
 المجالات: Cybersecurity | Blue Team | SOC Operations | Python Automation 
 =======
 **1- تنفيذ الأداة والفحص عبر الـ Terminal:**
-![Terminal Output](screenshots/triage_output_v2.png)
+![Terminal Output](screenshots/triage_output_v3.png)
 
 **2- معاينة التقرير الناتج بصيغة Markdown:**
-![Report Preview](screenshots/report_preview_v2.png)
+![Report Preview](screenshots/report_preview_v3.png)
 >>>>>>> bf5d7e9 (Rename screenshots to refresh GitHub image links)
